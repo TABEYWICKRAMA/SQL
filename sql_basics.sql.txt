@@ -1,0 +1,62 @@
+create database Customers   #To Create a Customer Database 
+
+USE Customers  #using this command we are going to use Customers Database now on wards
+
+CREATE TABLE CustomerDetails(
+ID SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+FirstName VARCHAR(30),
+LastName VARCHAR(30),
+Age TINYINT UNSIGNED NOT NULL,
+Gender CHAR(6) NOT NULL,
+ProductsBought TINYINT UNSIGNED NOT NULL DEFAULT 0,
+PRIMARY KEY (ID),
+CHECK (Age > 12)
+);
+
+ALTER TABLE CustomerDetails
+ADD PhoneNumber varchar(10) NOT NULL UNIQUE;
+
+ALTER TABLE CustomerDetails
+ADD EmailID varchar(50) UNIQUE;
+
+-- fix length is used in CHAR data type
+-- MODIFY command is used inside ALTER to modify the properties of table
+
+ALTER TABLE CustomerDetails
+MODIFY COLUMN PhoneNumber char(10);
+
+-- drop EmailID column
+ALTER TABLE CustomerDetails
+DROP COLUMN EmailID;
+
+-- to DROP entire database
+DROP DATABASE Customers;
+
+-- TRUNCATE command is used to remove records keeping table structure as it is
+TRUNCATE TABLE CustomerDetails
+
+-- insert data to the table
+INSERT INTO CustomerDetails(ID, FirstName, LastName, Age, Gender, ProductsBought, PhoneNumber) VALUES (DEFAULT, "Rahul", "Sharma", 30, "male", DEFAULT, "0718907506");
+INSERT INTO CustomerDetails(ID, FirstName, LastName, Age, Gender, ProductsBought, PhoneNumber) VALUES (DEFAULT, "Dhoni", "Sharma", 30, "male", DEFAULT, "0718907507");
+
+select * from CustomerDetails
+
+-- UPDATE Command is used to update existing records
+-- lets update Rahul Sharma's phone number
+
+UPDATE CustomerDetails 
+SET PhoneNumber = "0773169676"
+WHERE ID = 1;
+
+-- update this 
+-- Doni Sharma's actual Age is 33. and he bought 10 products.
+
+UPDATE CustomerDetails 
+SET Age = "33" , ProductsBought = "10"
+WHERE ID = 2;
+
+-- update this 
+-- Rahul Sharma is going to cancel his membership so remove him from table
+
+DELETE FROM CustomerDetails
+WHERE ID = 1;
