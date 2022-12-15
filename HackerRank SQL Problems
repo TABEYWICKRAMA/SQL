@@ -41,15 +41,19 @@ FROM STATION
 WHERE ID % 2 = 0;
 
 09.
-| station |
-|Field |Type|
+| Field  | Type |
+| ------ | ------------- |
+| ID     | NUMBER  |
+| CITY   | VARCHAR2(21)  |
+| STATE  | VARCHAR2(21)  |
+| LAT_N  | NUMBER  |
+| LONG_W | NUMBER  |
+
+
+
 
 SELECT DISTINCT CITY
 FROM STATION
 WHERE RIGHT(CITY,1) NOT IN ('A','E','I','O','U')
 
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
