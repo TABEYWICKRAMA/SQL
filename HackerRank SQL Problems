@@ -41,15 +41,17 @@ FROM STATION
 WHERE ID % 2 = 0;
 
 09.
+select different cities from station table.
+and these cities should not end with vowels.
+duplicate cities can not be retrieved.
+
 | Field  | Type |
 | ------ | ------------- |
-| ID     | NUMBER  |
+| ID     | NUMBER        |
 | CITY   | VARCHAR2(21)  |
 | STATE  | VARCHAR2(21)  |
-| LAT_N  | NUMBER  |
-| LONG_W | NUMBER  |
-
-
+| LAT_N  | NUMBER        |
+| LONG_W | NUMBER        |
 
 
 SELECT DISTINCT CITY
