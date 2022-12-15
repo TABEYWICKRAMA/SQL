@@ -1,46 +1,4 @@
-HackerRank website --->> SQL
-
 01.
-
-select *
-from CITY
-where POPULATION > 100000 AND COUNTRYCODE = 'USA'
-
-02. 
-SELECT NAME
-FROM CITY
-WHERE POPULATION > 120000 AND COUNTRYCODE = 'USA';
-
-03.
-SELECT *
-FROM CITY;
-
-04.
-SELECT *
-FROM CITY
-WHERE ID = 1661;
-
-05.
-SELECT *
-FROM CITY
-WHERE COUNTRYCODE = 'JPN';
-
-06.
-SELECT NAME
-FROM CITY
-WHERE COUNTRYCODE = 'JPN';
-
-
-07.
-SELECT CITY, STATE
-FROM STATION;
-
-08.
-SELECT DISTINCT CITY
-FROM STATION 
-WHERE ID % 2 = 0;
-
-09.
 select different cities from station table.
 and these cities should not end with vowels.
 duplicate cities can not be retrieved.
@@ -61,4 +19,33 @@ WHERE RIGHT(CITY,1) NOT IN ('A','E','I','O','U')
 -- RIGHT FUNCTION used to get cities that are relevant for this question
 first mention attribute name which is CITY.
 second mention what character is we want to from end. 1 is the last character. 
+
+02.
+Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.
+The STATION table is described as follows:
+
+| Field  | Type |
+| ------ | ------------- |
+| ID     | NUMBER        |
+| CITY   | VARCHAR2(21)  |
+| STATE  | VARCHAR2(21)  |
+| LAT_N  | NUMBER        |
+| LONG_W | NUMBER        |
+
+SELECT DISTINCT CITY 
+FROM STATION 
+WHERE MOD(ID,2)=0 
+ORDER BY CITY ASC;  
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE ID % 2 = 0
+ORDER BY CITY ASC;
+
+
+03. Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates
+SELECT DISTINCT(CITY) 
+FROM STATION 
+WHERE CITY LIKE '%a' OR CITY LIKE '%e' OR CITY LIKE '%i' OR CITY LIKE '%o' OR CITY LIKE '%u';     
+
 
