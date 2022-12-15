@@ -58,4 +58,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE RIGHT(CITY,1) NOT IN ('A','E','I','O','U')
 
+-- RIGHT FUNCTION used to get cities that are relevant for this question
+first mention attribute name which is CITY.
+second mention what character is we want to from end. 1 is the last character. 
 
