@@ -1,0 +1,235 @@
+01.
+
+Query the average population for all cities in CITY. rounded down to the nearest integer.
+
+|Field		| Type         |
+|---------------|--------------|
+|ID		| NUMBER       |
+|NAME		| VARCHAR2(17) |
+|COUNTRY CODE	| VARCHAR2(3)  |
+|DISTRICT	| VARCHAR2(20) |
+|POPULATION	| NUMBER       |
+
+Solution
+
+SELECT ROUND(AVG(POPULATION))
+FROM CITY;
+
+
+02.
+
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|Field	        | Type         |
+|---------------|--------------|
+|ID	        |NUMBER        |
+|CITY	        |VARCHAR2(21)  |
+|STATE	        |VARCHAR2(2)   |
+|LAT_N	        |NUMBER        |
+|LONG_W	        |NUMBER        |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Solution
+
+SELECT DISTINCT CITY 
+FROM STATION 
+WHERE upper(SUBSTR(CITY,1,1)) NOT IN ('A','E','I','O','U') AND lower(SUBSTR(CITY,1,1)) NOT IN('a','e','i','o','u');
+
+
+Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1) NOT IN ('A','E','I','O','U');
+
+
+03.
+
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+
+|Field	        | Type         |
+|---------------|--------------|
+|ID	        |NUMBER        |
+|CITY	        |VARCHAR2(21)  |
+|STATE	        |VARCHAR2(2)   |
+|LAT_N	        |NUMBER        |
+|LONG_W	        |NUMBER        |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Solution
+
+SELECT DISTINCT CITY 
+FROM STATION 
+WHERE (CITY LIKE 'A%' OR CITY LIKE 'E%' OR CITY LIKE 'I%' OR CITY LIKE 'O%' OR CITY LIKE 'U%') 
+	AND (CITY LIKE '%a' OR CITY LIKE '%e' OR CITY LIKE '%i' OR CITY LIKE '%o' OR CITY LIKE '%u') 
+order by city;   
+
+
+Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1) IN ('A','E','I','O','U') AND
+	RIGHT(CITY,1) IN ('A','E','I','O','U');
+
+
+04.
+
+Query the greatest value of the Northen Latiudes(LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+
+|Field	        | Type         |
+|---------------|--------------|
+|ID	        |NUMBER        |
+|CITY	        |VARCHAR2(21)  |
+|STATE	        |VARCHAR2(2)   |
+|LAT_N	        |NUMBER        |
+|LONG_W	        |NUMBER        |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Solution
+
+SELECT TRUNCATE(MAX(LAT_N), 4)
+FROM STATION
+WHERE LAT_N < 137.2345;
+
+
+
+05.
+
+Query the Western Longitude (LONG_W) for the largest Northern Latitude(LAT_N) in STATION that is less than 137.2345
+Round your answer to 4 decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+
+|Field	        | Type         |
+|---------------|--------------|
+|ID	        |NUMBER        |
+|CITY	        |VARCHAR2(21)  |
+|STATE	        |VARCHAR2(2)   |
+|LAT_N	        |NUMBER        |
+|LONG_W	        |NUMBER        |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Solution
+
+SELECT ROUND(LONG_W, 4)
+FROM STATION
+WHERE LAT_N < 137.2345
+ORDER BY LAT_N DESC
+LIMIT 1;
+
+
+
+06.
+
+
+Query the greatest value of the Northern Latitudes(LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 Decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+
+|Field	        | Type         |
+|---------------|--------------|
+|ID	        |NUMBER        |
+|CITY	        |VARCHAR2(21)  |
+|STATE	        |VARCHAR2(2)   |
+|LAT_N	        |NUMBER        |
+|LONG_W	        |NUMBER        |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Solution
+
+SELECT MAX(LAT_N)
+FROM STATION
+WHERE LAT_N < 137.2345
+
+------->>>
+Apply Truncate function to get 4 decimal places
+
+SELECT TRUNCATE(MAX(LAT_N), 4) 
+FROM STATION
+WHERE LAT_N < 137.2345
+
+
+07. 
+
+Query the Western Longitude(LONG_W) for the largest Northern Latitude(LAT_N) in STATION that is less than 137.2345.
+Round your answer to 4 decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+
+|Field	        | Type         |
+|---------------|--------------|
+|ID	        |NUMBER        |
+|CITY	        |VARCHAR2(21)  |
+|STATE	        |VARCHAR2(2)   |
+|LAT_N	        |NUMBER        |
+|LONG_W	        |NUMBER        |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Solution
+
+SELECT ROUND(LONG_W, 4)
+FROM STATION 
+WHERE LAT_N < 137.2345
+ORDER BY LAT_N DESC       ---------->>> to get largest Northern Latitude(LAT_N). then set limit as 1. 
+LIMIT 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
