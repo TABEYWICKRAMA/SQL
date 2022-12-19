@@ -202,34 +202,3 @@ FROM STATION
 WHERE LAT_N < 137.2345
 ORDER BY LAT_N DESC       ---------->>> to get largest Northern Latitude(LAT_N). then set limit as 1. 
 LIMIT 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
