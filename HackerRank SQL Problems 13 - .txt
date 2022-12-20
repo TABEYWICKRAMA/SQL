@@ -154,13 +154,3 @@ ORDER BY COUNT(occupation), occupation ASC
 countinue from 18 -> 
 countinue from 3 to 9 
 
-
-
-
-
-
-
-
-
-
-
