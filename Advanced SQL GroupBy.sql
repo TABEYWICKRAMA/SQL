@@ -218,3 +218,19 @@ select DEPARTMENT_ID, ROUND(AVG(SALARY),2) AS 'AVERAGE SALARY'
 from tableName
 group by DEPARTMENT_ID
 having COUNT(EMPLOYEE_ID) > 10
+
+--- If a SELECT clause contains column expressions that are not aggregate expressions, 
+--- and if a GROUP BY clause is specified, those column expressions must be in the GROUP BY clause.
+
+select DEPARTMENT_ID, JOB_ID, ROUND(AVG(SALARY),2) AS 'AVERAGE SALARY'
+from tableName
+group by DEPARTMENT_ID
+having COUNT(EMPLOYEE_ID) > 10
+
+-- That's why above statement gives an error. but if we add 'JOB_ID' into group by then, it is not give an error
+
+select DEPARTMENT_ID, JOB_ID, ROUND(AVG(SALARY),2) AS 'AVERAGE SALARY'
+from tableName
+group by DEPARTMENT_ID, JOB_ID
+having COUNT(EMPLOYEE_ID) > 10
+
