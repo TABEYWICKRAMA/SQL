@@ -55,6 +55,9 @@ UPDATE CustomerDetails
 SET Age = "33" , ProductsBought = "10"
 WHERE ID = 2;
 
+Difference between DROP TABLE and TRUNCATE TABLE:
+If you want to empty a table but keep its structure, use TRUNCATE TABLE. If you want to remove the table entirely, use DROP TABLE. 
+
 -- update this 
 -- Rahul Sharma is going to cancel his membership so remove him from table
 
