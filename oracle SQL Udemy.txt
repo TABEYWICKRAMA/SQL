@@ -1,0 +1,518 @@
+1. view all the data
+
+select *
+from <table name>;
+ 
+ex: 
+select *
+from employee; 
+
+2. select individual column
+
+select employee_id, department_id
+from employee;
+
+3. select with where statement
+
+select employee_id, department_id
+from employee
+where last_name = 'Smith';
+
+4. comparison operators
+not equal <> , !=
+equal =
+greater than or less than (>,<) 
+greater than or equal ,less than or equal (>= , <=)
+
+select employee_id, firstname
+from employee
+where last_name <> 'Jones';
+
+select employee_id, firstname
+from employee
+where employee_id > 5;
+
+5. Filtering with LIKE
+
+select employee_id, firstname
+from employee
+where first_name LIKE 'Ann_'; 
+
+this query return first_name matches 'Ann' + fourth character can be any character.
+
+6. Filtering Date vales
+
+when HIRE_DATE column like this
+27/AUG/11
+02/JAN/12
+04/DEC/16
+12/OCT/11
+
+the query will be,
+
+select *
+from employee
+where hire_date ='03-OCT-2010';
+
+how to find the pattern of the date column, run this
+
+SELECT value
+FROM SYS,NLS_DATABASE_PARAMETERS
+WHERE parameter = 'NLS_DATE_FORMAT';
+
+output
+DD-MM-RR
+
+----------CONTINUE FROM VIDEO NO 14
+
+-- Section 8: Aggregate Functions and Grouping
+
+a. What are functions?
+
+
+
+b. counting data
+
+select count(*)
+from customer;
+
+c. Using count in other ways
+
+1. Use with WHERE to see records matching our criteria
+SELECT COUNT(*)
+FROM employee
+first name = 'Barbara';
+
+2. Find non-NULL values in a column
+SELECT COUNT(salary)
+employee;
+
+this removes null values automatically.
+count eka athulata column eka dammama automatically this happen.
+
+3. Find unique values in a column
+SELECT COUNT(DISTINCT last_name)
+FROM employee;
+
+
+d. Counting Data Within Groups with GROUP BY
+
+Count of each last name
+Count of each first name
+Count of each salary
+Count of each hire date
+How do we do this?
+
+to do above tasks we can use distinct with count in the select statement. 
+but count is aggregate function. so that is impossible. 
+we have to use group by clause.
+
+*api aggregate functions use karanakota select statement eke tiyena hamadema group by ekatat danna ona without aggregate functions. 
+
+ex:
+select last_name, count(*)
+from employee
+group by last_name;
+
+e. GROUP BY with WHERE and ORDER BY
+
+F. GROUP BY with Multiple Columns
+
+g. GROUP BY with HAVING
+this apply after the GROUP BY clause, only the results of GROUP BY. 
+if you want to filter before the GROUP BY, use WHERE clause. 
+
+SELECT last name, COUNT(*)
+FROM employee
+GROUP BY last name
+HAVING COUNT(*) > 1;
+
+h. The SUM Function
+
+i. Using the MAX and MIN functions
+
+j. Using the AVG function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- FUNCTIONS (section 10) COMPLETEEEEEEEEE
+
+a. string function
+
+1. INSTR function
+this function ->  INSTR([column name], [character or symbol you looking])
+this gives the location of that character or symbol you given.
+if zero then that row does not contain that character or symbol.
+
+select customer_id, first_name, last_name, email_address,
+INSTR(email_address, '@')
+from customer;
+
+2. LENGTH function
+this count the number of characters of given column row by row
+
+select customer_id, first_name, last_name, email_address,
+LENGTH(first_name)
+from customer;
+
+
+SELECT customer_ld, first_name, last_name, email_address, address_state,
+INSTR(email_address, '@'),
+LENGTH (address_state)
+FROM customer
+WHERE INSTR(email_address) > 0 AND LENGTH (address_state) =2;
+
+
+b. Nesting functions withing functions
+
+1. SUBSTR function
+this require 3 inputs. 
+SUBSTR(source,position,length)
+The SUBSTR function is used to extract a portion of a string.
+ex: find the domains of customer email addresses. but all the email are different lengths. 
+
+
+SELECT customer_id, first_name,email_address,address_state,
+SUBSTR(email_address, INSTR(email_address, '@'), 100)
+FROM customer;
+
+output:
+@abs.com
+@gmail.com
+@outlook.com
+@awe.com
+
+remove '@' symbol
+
+SELECT customer_id, first_name,email_address,address_state,
+SUBSTR(email_address, INSTR(email_address, '@')+1, 100)
+FROM customer;
+
+output:
+abs.com
+gmail.com
+outlook.com
+awe.com
+
+give dynamic length
+
+SELECT customer_id, first_name,email_address,address_state,
+SUBSTR(email_address, INSTR(email_address, '@')+1, length(email_address))
+FROM customer;
+
+output:
+abs.com
+gmail.com
+outlook.com
+awe.com
+
+
+c. Number functions
+
+ROUND(), CEIL(), FLOOR() 
+
+1. ROUND()
+
+SELECT product_name, ROUND(price)
+FROM product;
+
+output : create new column for price column, no decimal places
+
+
+SELECT product_name, ROUND(price,1)
+FROM product;
+
+output : create new column for price column with one decimal place 
+
+2. CEIL()
+
+SELECT product_name, ROUND(price), CEIL(price)
+FROM product;
+
+
+3. FLOOR() 
+
+SELECT product_name, ROUND(price), CEIL(price), FLOOR(price)
+FROM product;
+
+question:
+if customer buy 9 monitors at once, consumer give 15% of discount. how much amount should customer spent for this? (round the value)
+monitor is in product table. 
+product_id=1 is monitor.
+
+select product_id, product_name, price, ROUND(price* 9 * 0.85, 2)
+from product
+where product_id=1;
+
+d. DATE function
+
+SYSDATE: get the current date to a new column  
+--->> this does not want any input just use it.
+
+ADD_MONTHS: add a number of months to a date value
+--->> ADD_MONTHS([column name], [number of months])
+
+MONTHS_BETWEEN: finds the difference between two date values
+--->> MONTHS_BETWEEN(column name1, column name2)
+
+
+select employee_id, first_name, last_name, SYSDATE
+from employee;
+
+
+all the employees have probation period before they hired. find the hired date. 
+
+select employee_id, first_name, last_name, hire_date, 
+ADD_MONTHS(hire_date, 6)
+from employee;
+
+
+how long the employees joined to this company
+select employee_id, first_name, last_name, hire_date, MONTHS_BETWEEN(SYSDATE, hire_date)
+from employee;
+
+-- DUAL TABLE
+
+*only if you want to know the current date or
+*you do not interact with the table data use DUAL TABLE
+
+select SYSDATE
+from dual;
+
+select ADD_MONTHS(SYSDATE,20)
+from dual;
+
+
+e. Data Types and Conversion Functions
+
+Common Data Types
+• CHAR: character string with fixed size
+• VARCHAR2: character string with a variable size
+• NUMBER: stores numeric data with optional decimals
+• DATE: stores date and time
+• TIMESTAMP: stores date, time, and fractional seconds
+• CLOB: stores large amounts of text
+
+convert data type is possible. 
+TO_CHAR, TO_DATE, TO_NUMBER
+are most frequent data conversion functions. 
+
+
+1. convert hire_date column into char.
+
+SELECT first_name,last_name,hire_date,
+TO_CHAR(hire_date, 'YYYY_MM_DD')
+FROM employee;
+
+2. 2017_05_28 covert this to date data type. 
+
+SELECT TO_DATE('2017_05_28','YYYY_MM_DD')
+FROM dual;
+
+3. '200' convert this to number data type
+
+SELECT TO_NUMBER('200')
+FROM dual;
+
+
+f. CASE Statement
+
+Syntax
+CASE [expression] WHEN condition_l THEN result_l
+WHEN condition 2 THEN result 2
+
+product table eke product wala price eka over 100 and below 100 widiyata categorize karanna.
+
+SELECT product_id,product_name ,price,
+CASE
+WHEN price > 100 THEN 'Over 100'
+WHEN price < 100 THEN 'Less than or under 100'
+END price_group                            <<---- this price_group is the column name
+FROM product;
+
+
+SELECT product id, product name, price,
+CASE
+WHEN price > 200 THEN 'Over 200'
+WHEN price > 100 AND price < 200 THEN 'Between 100 and 200'
+WHEN price > 5O AND price > 100 THEN 'Between 5O and 100'
+ELSE 'Under 5O'
+END price group
+FROM product;
+
+
+SELECT customer_id, first_name, last_name,
+address_state,
+CASE address_state
+WHEN 'NY' THEN 'East'
+WHEN 'CA' THEN 'West'
+WHEN 'OR' THEN 'West'
+WHEN 'SC' THEN 'East'
+WHEN 'TX' THEN 'West'
+WHEN 'FL' THEN 'East'
+WHEN 'IN' THEN 'East'
+ELSE 'Unknown'
+END state_group
+FROM customer;
+
+
+simplify above query using IN clause. 
+
+SELECT customer_id, first_name, last_name,
+address_state,
+CASE 
+WHEN address_state IN ('NY','SC','FL','IN') THEN 'East'
+WHEN address_state IN ('CA','OR','TX') THEN 'West'
+ELSE 'Unknown'
+END state_group
+FROM customer;
+
+
+
+-- Section 11: Subqueries -->> completeeee
+
+a. Single Row Subquery -->> sub query returns single value
+
+SELECT employee_id, first name, last name, salary
+FROM employee
+WHERE salary > (
+	SELECT AVG(salary)
+	FROM employee
+);
+
+
+b. Multi-Raw Subquery
+IN(), > ANY(), < ALL()
+
+
+• See all employees where their department is either Sales or Finance
+• Could do this with a JOIN and WHERE
+• But this is just for an example
+
+Example
+See all employees where their department is either Sales or Finance.
+
+SELECT employee_id, first_name, last_name, department_id
+FROM employee
+WHERE department_id IN (
+	SELECT department_id
+	FROM department
+	WHERE department_name IN ('Sales','Finance')
+)
+
+the below query will return an error. cause sub query SELECT clause should equal to main query WHERE clause.
+
+SELECT employee_id, first_name, last_name, department_id
+FROM employee
+WHERE department_id IN (
+	SELECT department_id, department_name
+	FROM department
+	WHERE department_name IN ('Sales','Finance')
+)
+
+
+
+
+
+
+
+-- Section 12: Inserting, Updating, and Deleting Data
+
+a. Inserting to a table
+ 
+you can add one by one 
+
+1. with specified columns
+you do not need to specify all the columns. 
+missed columns get NULL value.
+
+INSERT into employee (employee_id, first_name, last_name, department_id, salary, manager_id, hire_Date) VALUES (302, 'Matt', 'Johnson',1, 82000, 14, '10-JAN-2017');
+
+2. without specified columns
+INSERT into employee VALUES (302, 'Matt', 'Johnson',1, 82000, 14, '10-JAN-2017');
+
+
+3. or you can add data in one query also. 
+
+INSERT ALL 
+INTO employee VALUES (302, 'Matt', 'Johnson',1, 82000, 14, '10-JAN-2017')
+INTO employee VALUES (303, 'TOM', 'Sins',2, 23000, 64, '12-JAN-2017')
+INTO employee VALUES (304, 'Eva', 'Anvar',1, 14000, 74, '13-JAN-2017')
+INTO employee VALUES (305, 'Krish', 'Addam',3, 52000, 84, '14-JAN-2017')
+SELECT * FROM dual;
+
+
+b. Inserting Data From Another Table
+• INSERT INTO target_table (columns)
+SELECT (columns) FROM source_table...
+
+• SELECT needs to have the same number and type of
+columns as the INSERT table
+
+c. Updating Data
+
+d. Deleting Data
+
+e. COMMIT and ROLLBACK
+
+f. Truncating Data 
+
+
+
+
+
+-- Section 13: Creating, Altering, and Dropping Tables
+
+a. Create a Table
+
+b. Alter a Table
+
+c. Drop a Table
+
+d. Conclusion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
