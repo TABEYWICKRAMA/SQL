@@ -1,10 +1,10 @@
 SQL
 This folder contains fundamentals of SQL
 
-# What is SQL? 
+## What is SQL? 
 Structured query language. SQL is a Programming language to manage and manipulate data in relational databases. This is used to perform various operations on data stored in database, such as querying, updating, inserting and deleting data.  
 
-# What is DQL, DML, DDL, DCL?
+## What is DQL, DML, DDL, DCL?
 
 DQL (Data Query Language) : SELECT, WHERE, JOIN's, GROUP BY, ORDER BY
 
