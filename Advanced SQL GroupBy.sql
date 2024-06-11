@@ -180,6 +180,8 @@ select MANAGER_ID, min(SALARY) as 'minimum salary'
 from tableName
 group by MANAGER_ID
 
+--In SQL, when you use aggregate functions in a SELECT statement, all columns in the SELECT list that are not part of an aggregate function must be included in the GROUP BY clause.    
+
 
 -- 10. Write a query to get the department ID and the total salary payable in each department.
 
